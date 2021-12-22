@@ -1,0 +1,32 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{controller_name}}{% endblock %}
+
+{% block body %}
+{# {% for err in  errors %}
+<h2>{{err}}</h2>
+{% endfor %} #}
+
+                        <div class="row">
+                        <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">Edit User</div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">Edit User</h3>
+                                        </div>
+                                        <hr>
+                                       {{form_start(FormEdit)}}
+                                        {{form(FormEdit)}}
+                                       {{form_end(FormEdit)}}
+                                      </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-2"></div>
+                           
+                        </div>
+              
+{% endblock %}
+

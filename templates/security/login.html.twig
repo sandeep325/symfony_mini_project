@@ -1,0 +1,51 @@
+{% extends 'base_auth.html.twig' %}
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+
+<div class="row">
+                        {# <div class="col-lg-2"></div> #}
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">Please sign in</div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">Please sign in</h3>
+                                        </div>
+                                        <hr>
+
+                                       {# {{form_start(FormEdit)}}
+                                        {{form(FormEdit)}}
+                                       {{form_end(FormEdit)}} #}
+                                       <form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+                    <label for="inputUsername">Username</label>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}" ><hr>
+     <button class="btn btn-md btn-primary" type="submit">
+        Sign in
+    </button>
+    If you don't have an account <a href="{{path('app_register')}}">Register here !</a>
+</form>
+
+                                      </div>
+                                </div>
+                            </div>
+                             <div class="col-lg-2"></div>
+                           
+                        </div>
+
+{% endblock %}

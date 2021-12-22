@@ -1,0 +1,26 @@
+{% extends 'base_auth.html.twig' %}
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+               <div class="col-lg-10">
+                              
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        <strong>Register</strong> here
+                                    </div>
+                                    <div class="card-body card-block">
+                                      {# form here  #}
+
+                                      {{form(registerForm)}}
+                                    </div>
+                                    <div class="card-footer">
+                                    
+                                        <b> If you have aleady accountd <a href="{{path('app_login')}}">LogIn here !</a></b>
+                                    </div>
+                                </div>
+                               
+                            
+                            </div>
+
+{% endblock %}

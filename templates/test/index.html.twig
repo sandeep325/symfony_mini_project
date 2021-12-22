@@ -1,0 +1,167 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{controller_name}}{% endblock %}
+
+{% block body %}
+  
+                        <div class="row">
+                        {# for msg #}
+                        <div class="col-md-6">
+                       {% for msg in app.flashes('editflash') %}
+                        <div class="alert alert-success text-center">
+                         {{msg}}
+                             </div>
+                        {% endfor %}
+                        {# for delete msg #}
+                        {% for msg in app.flashes('deleteflash') %}
+                           <div class="alert alert-danger text-center">
+                             {{msg}}
+                                </div>
+                           {% endfor %}
+                         </div>
+                         {# end #}
+                            <div class="col-md-6">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1"></h2>
+                                    <a href="{{path('adduser')}}"class="au-btn au-btn-icon btn btn-info text-white">
+                                        <i class="zmdi zmdi-plus"></i>Add User</a>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        {# <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-account-o"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>10368</h2>
+                                                <span>members online</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-shopping-cart"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>388,688</h2>
+                                                <span>items solid</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-calendar-note"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>1,086</h2>
+                                                <span>this week</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-money"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>$1,060,386</h2>
+                                                <span>total earnings</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> #}
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2 class="title-1 m-b-25">Users Listing</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No.</th>
+                                                <th class="text-right">name</th>
+                                                <th class="text-right">User Id</th>
+                                                <th class="text-right">Email</th>
+                                                <th class="text-right">Mobile</th>
+                                                <th class="text-right">City</th>
+                                                <th class="text-right">Age</th>
+                                                <th class="text-right">Action</th>
+                                                 
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                           {% set i = 1 %}
+                                           {% for data in response %}
+                                              <tr>
+                                              
+                                            <td> {{i}}</td>
+   <td class="text-right">{{data.name}}</td>
+   <td class="text-right">{{data.id}}</td>
+   <td class="text-right">{{data.email}}</td>
+   <td class="text-right">{{data.mobile}}</td>
+   <td class="text-right">{{data.city}}</td>
+   <td class="text-right">{{data.age}}</td>
+   <td>
+   <a href="{{ path('delete',{id:data.id}) }}" onclick=" return confirm(' Are you sure you want to delete user  ?')" class="btn btn-danger btn-sm">Delete</a>&nbsp;
+   <a href="{{ path('edit',{id:data.id}) }}" class="btn btn-info btn-sm">Edit</a>
+   </td>
+
+    </tr>
+    {% set i = i+1 %}
+
+   {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                  
+{% endblock %}
+

@@ -1,0 +1,28 @@
+{% extends 'base_auth.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {# <h1>Register</h1> #}
+     <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">Please Register here !</div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">Register</h3>
+                                        </div>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.username) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn btn-md btn-primary">Register</button>
+    {{ form_end(registrationForm) }}
+     If you don't have an account <a href="{{path('app_login')}}">Login here !</a>
+     </div>
+     </div>
+     </div>
+{% endblock %}
