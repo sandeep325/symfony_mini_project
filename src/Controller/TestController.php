@@ -29,8 +29,6 @@ class TestController extends AbstractController
             // $result = $entUsr->findBy(array('name'=>$username),array('id'=>'DESC')); //for find all order by
             $result = $entUsr->findAllWithSearch($username); //for find all order by
 
-            
-
         }  else {
             $result = $entUsr->findBy(array(),array('id'=>'DESC')); //for find all order by
 
