@@ -12,6 +12,7 @@ use App\Form\AddUsersType;
 use App\Form\EditUserType;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+
 class TestController extends AbstractController
 {
 
@@ -22,19 +23,47 @@ class TestController extends AbstractController
     {
         // $result = $entUsr->findAll();  //for find all
         // echo "<pre>"; print_r($_POST); die;
-       
-        
         if($_POST) {
+            // echo "<pre>"; print_r($_POST); die;
             $username  = $_POST['search'];
-            // $result = $entUsr->findBy(array('name'=>$username),array('id'=>'DESC')); //for find all order by
             $result = $entUsr->findAllWithSearch($username); //for find all order by
+            // echo  $result->getName();
+            // echo "<pre>"; print_r($result); die;
+                $i=1;
+            $htmlTable = NULL;
+                if($result) {
+
+                    foreach( $result as $key => $val) {
+
+                        $htmlTable .= '<tr>
+                          <td>'.$i.'</td>
+                          <td>'.$val->getName().'</td>
+                          <td>'.$val->getId().'</td>
+                          <td>'.$val->getEmail().'</td>
+                          <td>'.$val->getMobile().'</td>
+                          <td>'.$val->getCity().'</td>
+                          <td>'.$val->getAge().'</td>
+                          <td>
+                          <a href="Test/delete'.$val->getId().'" onclick = "return confirm(`Are You Sure want to delete ?`)" class="btn btn-danger btn-sm">Delete</a>&nbsp;
+                         <a href="Test/edit'.$val->getId().'" class="btn btn-info btn-sm">Edit</a>
+                          
+                          </td>
+
+                        </tr>';
+                        $i = $i+1;
+                    }
+
+                } else 
+                   {  $htmlTable .= '<tr><td class="alert-danger" colspan="8">Opes! Data Not Found...</td></tr>'; };
+
+                   echo $htmlTable;
+            exit;
 
         }  else {
             $result = $entUsr->findBy(array(),array('id'=>'DESC')); //for find all order by
 
         }
        
-
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
             'response' => $result,

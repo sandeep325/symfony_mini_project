@@ -25,7 +25,7 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                 <form class="form-header" action="{{path('test')}}" method="POST" autocomplete="off">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." value=""/>
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." value="" onkeyup= "searchData(this.value)"/>
                                 <button class="au-btn--submit" type="submit" name="submit" >
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -131,8 +131,8 @@
                                                 
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            
+                                        <tbody id="ajaxdata">
+                                            {% if response %}
                                            {% set i = 1 %}
                                            {% for data in response %}
                                               <tr>
@@ -153,8 +153,10 @@
     {% set i = i+1 %}
 
    {% endfor %}
-
-                                        </tbody>
+   {% else %}
+   <tr><td class="alert-danger" colspan="8">Opes! Data Not Found...</td></tr>
+{%  endif %}  
+   </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -169,5 +171,25 @@
                             </div>
                         </div>
                   
+<script>
+ function searchData(data) {
+  
+   $.ajax( {
+    url:'{{ (path('test')) }}',
+    type:'POST',
+    cache: false,
+    data:{search:data},
+ beforesend:function(){
+ },
+ success: function(response) {
+     console.log(response);
+     $('#ajaxdata').html(response);
+//code
+ }
+  });
+
+ }
+</script>
+
 {% endblock %}
 
