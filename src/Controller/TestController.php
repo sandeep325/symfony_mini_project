@@ -18,10 +18,24 @@ class TestController extends AbstractController
 // ==================================SHOW LISTING  DATA FUNCTION ============================================
 
     #[Route('/', name: 'test')]
-    public function index(UserRepository  $entUsr): Response
+    public function index(UserRepository  $entUsr,Request $request): Response
     {
         // $result = $entUsr->findAll();  //for find all
-        $result = $entUsr->findBy(array(),array('id'=>'DESC')); //for find all order by
+        // echo "<pre>"; print_r($_POST); die;
+       
+        
+        if($_POST) {
+            $username  = $_POST['search'];
+            // $result = $entUsr->findBy(array('name'=>$username),array('id'=>'DESC')); //for find all order by
+            $result = $entUsr->findAllWithSearch($username); //for find all order by
+
+            
+
+        }  else {
+            $result = $entUsr->findBy(array(),array('id'=>'DESC')); //for find all order by
+
+        }
+       
 
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
@@ -137,5 +151,23 @@ class TestController extends AbstractController
 
     }
 
+
+    // ===================================SEARCHING DATA FUNCTION  ========================================================
+//     #[Route('/Test/searchuser', name: 'searching')]
+//      public function searchData(UserRepository  $sUser,Request $request) {
+        
+//         $username  = $_POST['search'];
+//         //   echo $username ; die("test");
+//         $result =  $sUser->findBy(array('name'=>$username),array('id'=>'DESC')); //for find all order by
+
+//         return $this->render('test/index.html.twig', [
+//             'controller_name' => 'TestController',
+//             'response' => $result,
+//         ]);
+//                  return $result;
+//         // return $this->redirect($this->generateUrl('test'));  
+      
+ 
+//   }
 
 }

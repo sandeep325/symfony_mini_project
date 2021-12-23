@@ -46,4 +46,23 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findAllWithSearch(?string $name)
+    {
+        return $this->createQueryBuilder('u')
+            ->orWhere('u.name like :val')
+            ->orWhere('u.city like :val')
+            ->orWhere('u.email like :val')
+            ->orWhere('u.id like :val')
+            ->orWhere('u.age like :val')
+            ->orWhere('u.mobile like :val')
+            ->setParameter('val', '%'.$name.'%')
+            ->orderBy('u.id','DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
 }
